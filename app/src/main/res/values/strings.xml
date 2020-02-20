@@ -1,12 +1,9 @@
 <resources>
-    <string name="app_name">AppMediaEscolar</string>
-    <string name="action_settings">Settings</string>
-    <!-- Strings used for fragments for navigation -->
-    <string name="first_fragment_label">First Fragment</string>
-    <string name="second_fragment_label">Second Fragment</string>
-    <string name="next">Next</string>
-    <string name="previous">Previous</string>
-
-    <string name="hello_first_fragment">Hello first fragment</string>
-    <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
+    <string name="app_name">Média Escolar</string>
+    <string name="action_sair">Sair</string>
+    <string name="btn_primeiro_bimestre">1º Bimestre</string>
+    <string name="btn_segundo_bimestre">2º Bimestre</string>
+    <string name="btn_terceiro_bimestre">3º Bimestre</string>
+    <string name="btn_quarto_bimestre">4º Bimestre</string>
+    <string name="btn_resultado_final">Resultado Final</string>
 </resources>
