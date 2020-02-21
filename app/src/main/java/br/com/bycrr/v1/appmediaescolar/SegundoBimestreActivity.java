@@ -1,10 +1,13 @@
 package br.com.bycrr.v1.appmediaescolar;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
+/*
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+*/
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -12,6 +15,12 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.snackbar.Snackbar;
 
 public class SegundoBimestreActivity extends AppCompatActivity {
 
@@ -32,9 +41,11 @@ public class SegundoBimestreActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_primeiro_bimestre);
+        setContentView(R.layout.activity_segundo_bimestre);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        setTitle(getString(R.string.app_name) + " - 2º Bimestre");
 
         editMateria = findViewById(R.id.editMateria);
         editNotaProva = findViewById(R.id.editNotaProva);
@@ -53,35 +64,57 @@ public class SegundoBimestreActivity extends AppCompatActivity {
 
                     if (editNotaProva.getText().toString().length() > 0) {
                         notaProva = Double.parseDouble(editNotaProva.getText().toString());
+
+                        if (notaProva > 10) {
+                            dadosValidados = false;
+                            Toast.makeText(getApplicationContext(), "Nota inválida!", Toast.LENGTH_SHORT).show();
+                            editNotaProva.requestFocus();
+
+                        } else {
+                            dadosValidados = true;
+                        }
+
                     } else {
                         editNotaProva.setError("*");
                         editNotaProva.requestFocus();
-                        dadosValidados =false;
+                        dadosValidados = false;
                     }
-
 
                     if (editNotaTrabalho.getText().toString().length() > 0) {
                         notaTrabalho = Double.parseDouble(editNotaTrabalho.getText().toString());
+
+
+                        if (notaTrabalho > 10) {
+                            dadosValidados = false;
+                            Toast.makeText(getApplicationContext(), "Nota inválida!", Toast.LENGTH_SHORT).show();
+                            editNotaTrabalho.requestFocus();
+
+                        } else {
+                            dadosValidados = true;
+                        }
+
                     } else {
                         editNotaTrabalho.setError("*");
                         editNotaTrabalho.requestFocus();
                         dadosValidados = false;
                     }
 
-                    if(editMateria.getText().toString().length()==0){
+                    if (editMateria.getText().toString().length() == 0) {
                         editMateria.setError("*");
                         editMateria.requestFocus();
                         dadosValidados = false;
                     }
 
                     // Após Validação
-                    if(dadosValidados) {
+                    if (dadosValidados) {
                         media = (notaProva + notaTrabalho) / 2;
 
-                        txtResultado.setText(String.valueOf(media));
+                        txtResultado.setText(MainActivity.formatarValorDecimal(media));
 
                         if (media >= 7) txtSituacaoFinal.setText("Aprovado");
                         else txtSituacaoFinal.setText("Reprovado");
+
+                        salvarSharedPreferences();
 
                     }
 
@@ -128,5 +161,21 @@ public class SegundoBimestreActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    private void salvarSharedPreferences() {
+        SharedPreferences mediaEscolarPref = getSharedPreferences(MainActivity.NOME_SHARED_PREFER, 0);
+        SharedPreferences.Editor mediaEscolar = mediaEscolarPref.edit();
+
+        mediaEscolar.putString("materiaSegundoBimestre", editMateria.getText().toString());
+        mediaEscolar.putString("situacaoSegundoBimestre", txtSituacaoFinal.getText().toString());
+        mediaEscolar.putString("notaProvaSegundoBimestre", String.valueOf(notaProva));
+        mediaEscolar.putString("notaTrabalhoSegundoBimestre", String.valueOf(notaTrabalho));
+        mediaEscolar.putString("notaMediaSegundoBimestre", String.valueOf(media));
+        mediaEscolar.putBoolean("segundoBimestre", true);
+
+
+        mediaEscolar.commit();
+
     }
 }
