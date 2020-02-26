@@ -250,23 +250,15 @@ public class MainActivity extends AppCompatActivity {
                     && (Double.parseDouble(notaMediaTerceiroBimestre)>=7)
                     && (Double.parseDouble(notaMediaQuartoBimestre)>=7))
             {
-
                 // condição == algo ? faço isso : ou faço isso
-
                 mensagemFinal  = mediaFinal >= 7 ?
                         "Aprovado com Média Final " + formatarValorDecimal(mediaFinal) :
                         "Reprovado com Média Final " + formatarValorDecimal(mediaFinal);
 
-
             }else {
-
                 mensagemFinal  = "Reprovado por matéria com Média Final " + formatarValorDecimal(mediaFinal);
-
             }
-
-
             btnResultadoFinal.setText(mensagemFinal);
-
         }
     }
 
@@ -276,14 +268,11 @@ public class MainActivity extends AppCompatActivity {
         SharedPreferences.Editor editor = mediaEscolarPref.edit();
         editor.clear();
         editor.commit();
-
         clearMenu();
-
     }
 
     private void clearMenu()
     {
-
         btnResultadoFinal.setEnabled(false);
         btnQuartoBimestre.setEnabled(false);
         btnTerceiroBimestre.setEnabled(false);

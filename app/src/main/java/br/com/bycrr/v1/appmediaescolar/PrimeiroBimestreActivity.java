@@ -162,7 +162,7 @@ public class PrimeiroBimestreActivity extends AppCompatActivity {
 
     private void salvarSharedPreferences() {
         SharedPreferences mediaEscolarPref =
-                getSharedPreferences(MainActivity.NOME_SHARED_PREFER, 0);
+                getSharedPreferences(MainActivity.NOME_SHARED_PREFER, MODE_PRIVATE);
         SharedPreferences.Editor mediaEscolar = mediaEscolarPref.edit();
 
         mediaEscolar.putString("materiaPrimeiroBimestre", editMateria.getText().toString());
