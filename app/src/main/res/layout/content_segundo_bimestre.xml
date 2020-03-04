@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="#fb9b9b"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context="android.curso.mediaescolar.MainActivity"
+    tools:context=".MainActivity"
     tools:showIn="@layout/activity_primeiro_bimestre">
 
 
